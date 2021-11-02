@@ -3,9 +3,10 @@ import "p5/lib/addons/p5.dom";
 
 import { Particle } from "./Particle";
 
+const particleDiameter = 3;
 var sketch = (p: P5) => {
   let snowflake: Particle[] = [];
-  let activeParticle: Particle = new Particle(p, 10);
+  let activeParticle: Particle = new Particle(p, particleDiameter);
 
   p.setup = () => {
     p.createCanvas(p.windowWidth, p.windowHeight);
@@ -26,15 +27,17 @@ var sketch = (p: P5) => {
       activeParticle.tick();
     }
     snowflake.push(activeParticle);
-    activeParticle = new Particle(p, 10);
+    activeParticle = new Particle(p, particleDiameter);
 
-    activeParticle.draw();
-    snowflake.forEach((c) => {
-      c.draw();
-    });
     for (let i = 0; i < 6; i++) {
-      p.push();
       p.rotate(p.PI / 3);
+      activeParticle.draw();
+      snowflake.forEach((c) => {
+        c.draw();
+      });
+      p.push();
+      p.scale(-1, 1);
+
       activeParticle.draw();
       snowflake.forEach((c) => {
         c.draw();

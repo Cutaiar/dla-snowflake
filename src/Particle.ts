@@ -2,13 +2,13 @@ import P5, { Vector } from "p5";
 
 export class Particle extends Vector {
   private diameter: number;
-  private energy = 4;
+  private energy = 1;
   private p5: P5;
 
   constructor(p5: P5, diameter: number) {
     super();
     const x = p5.width / 2;
-    const y = 0;
+    const y = p5.random(30);
     this.set(x, y);
     this.diameter = diameter;
     this.p5 = p5;
@@ -25,6 +25,7 @@ export class Particle extends Vector {
 
   public draw() {
     this.p5.fill(255);
+    this.p5.noStroke();
     this.p5.circle(this.x, this.y, this.diameter);
   }
 
